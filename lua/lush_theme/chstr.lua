@@ -96,7 +96,7 @@ local theme = lush(function(injected_functions)
     -- MsgSeparator   { }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     -- MoreMsg        { }, -- |more-prompt|
     -- NonText        { }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    -- Normal         { }, -- Normal text
+    Normal         { bg = hsl("#2c3643"), fg = hsl("#ffffff") }, -- Normal text
     -- NormalFloat    { }, -- Normal text in floating windows.
     -- FloatBorder    { }, -- Border of floating windows.
     -- FloatTitle     { }, -- Title of floating windows.
@@ -140,23 +140,23 @@ local theme = lush(function(injected_functions)
     --
     -- Uncomment and edit if you want more specific syntax highlighting.
 
-    -- Comment        { }, -- Any comment
+    Comment        { fg = hsl("#8f8f8f") }, -- Any comment
 
     -- Constant       { }, -- (*) Any constant
-    -- String         { }, --   A string constant: "this is a string"
-    -- Character      { }, --   A character constant: 'c', '\n'
-    -- Number         { }, --   A number constant: 234, 0xff
-    -- Boolean        { }, --   A boolean constant: TRUE, false
-    -- Float          { }, --   A floating point constant: 2.3e10
+    String         { fg = hsl("#16c98d") }, --   A string constant: "this is a string"
+    Character      { fg = hsl("#18dd9c") }, --   A character constant: 'c', '\n'
+    Number         { fg = hsl("#ffc83f") }, --   A number constant: 234, 0xff
+    Float          { fg = Number.fg }, --   A floating point constant: 2.3e10
+    Boolean        { fg = hsl("#ff9f3f"), bold = true }, --   A boolean constant: TRUE, false
 
-    -- Identifier     { }, -- (*) Any variable name
-    -- Function       { }, --   Function name (also: methods for classes)
+    Identifier     { fg = hsl("#28b9d6") }, -- (*) Any variable name
+    Function       { fg = hsl("#288ad6") }, --   Function name (also: methods for classes)
 
-    -- Statement      { }, -- (*) Any statement
+    Statement      { fg = hsl("#eb94bb") }, -- (*) Any statement
     -- Conditional    { }, --   if, then, else, endif, switch, etc.
     -- Repeat         { }, --   for, do, while, etc.
     -- Label          { }, --   case, default, etc.
-    -- Operator       { }, --   "sizeof", "+", "*", etc.
+    Operator       { fg = hsl("#fa5e5b") }, --   "sizeof", "+", "*", etc.
     -- Keyword        { }, --   any other keyword
     -- Exception      { }, --   try, catch, throw
 
@@ -171,12 +171,12 @@ local theme = lush(function(injected_functions)
     -- Structure      { }, --   struct, union, enum, etc.
     -- Typedef        { }, --   A typedef
 
-    -- Special        { }, -- (*) Any special symbol
+    Special        { fg = hsl("#eb94bb")}, -- (*) Any special symbol
     -- SpecialChar    { }, --   Special character in a constant
     -- Tag            { }, --   You can use CTRL-] on this
-    -- Delimiter      { }, --   Character that needs attention
     -- SpecialComment { }, --   Special things inside a comment (e.g. '\n')
     -- Debug          { }, --   Debugging statements
+    Delimiter      { fg = Normal.fg }, --   Character that needs attention
 
     -- Underlined     { gui = "underline" }, -- Text that stands out, HTML links
     -- Ignore         { }, -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
@@ -198,21 +198,21 @@ local theme = lush(function(injected_functions)
 
     -- See :h diagnostic-highlights, some groups may not be listed, submit a PR fix to lush-template!
     --
-    -- DiagnosticError            { } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    -- DiagnosticWarn             { } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    -- DiagnosticInfo             { } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    -- DiagnosticHint             { } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    -- DiagnosticOk               { } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticError            { fg = hsl("#fa5e5b") } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticWarn             { fg = hsl("#ff9f3f") } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticInfo             { fg = hsl("#28b9d6") } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticHint             { fg = hsl("#288ad6") } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticOk               { fg = hsl("#18dd9c") } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
     -- DiagnosticVirtualTextError { } , -- Used for "Error" diagnostic virtual text.
     -- DiagnosticVirtualTextWarn  { } , -- Used for "Warn" diagnostic virtual text.
     -- DiagnosticVirtualTextInfo  { } , -- Used for "Info" diagnostic virtual text.
     -- DiagnosticVirtualTextHint  { } , -- Used for "Hint" diagnostic virtual text.
     -- DiagnosticVirtualTextOk    { } , -- Used for "Ok" diagnostic virtual text.
-    -- DiagnosticUnderlineError   { } , -- Used to underline "Error" diagnostics.
-    -- DiagnosticUnderlineWarn    { } , -- Used to underline "Warn" diagnostics.
-    -- DiagnosticUnderlineInfo    { } , -- Used to underline "Info" diagnostics.
-    -- DiagnosticUnderlineHint    { } , -- Used to underline "Hint" diagnostics.
-    -- DiagnosticUnderlineOk      { } , -- Used to underline "Ok" diagnostics.
+    DiagnosticUnderlineError   { sp = DiagnosticError.fg, underline = true } , -- Used to underline "Error" diagnostics.
+    DiagnosticUnderlineWarn    { sp = DiagnosticWarn.fg, underline = true } , -- Used to underline "Warn" diagnostics.
+    DiagnosticUnderlineInfo    { sp = DiagnosticInfo.fg, underline = true } , -- Used to underline "Info" diagnostics.
+    DiagnosticUnderlineHint    { sp = DiagnosticHint.fg, underline = true } , -- Used to underline "Hint" diagnostics.
+    DiagnosticUnderlineOk      { sp = DiagnosticOk.fg, underline = true } , -- Used to underline "Ok" diagnostics.
     -- DiagnosticFloatingError    { } , -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
     -- DiagnosticFloatingWarn     { } , -- Used to color "Warn" diagnostic messages in diagnostics float.
     -- DiagnosticFloatingInfo     { } , -- Used to color "Info" diagnostic messages in diagnostics float.
