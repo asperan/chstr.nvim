@@ -160,7 +160,7 @@ local theme = lush(function(injected_functions)
     -- Keyword        { }, --   any other keyword
     -- Exception      { }, --   try, catch, throw
 
-    -- PreProc        { }, -- (*) Generic Preprocessor
+    PreProc        { fg = Statement.fg }, -- (*) Generic Preprocessor
     -- Include        { }, --   Preprocessor #include
     -- Define         { }, --   Preprocessor #define
     -- Macro          { }, --   Same as Define
